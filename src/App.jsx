@@ -43,13 +43,12 @@ export default function App() {
     } else if (lastClickedLetter === letter && counter < 2) {
       // If letter is the same but counter is less than 2, add it to output and increment counter
       setClickedLetters([...clickedLetters, letter]);
-      let newOutput = output.substring(0, output.length - 1);
-      setOutput(newOutput + letter);
+      setOutput(output + letter);
       setCounter(counter + 1); // Increment counter
     } else if (lastClickedLetter === letter && counter === 2) {
       setCounter(0); // Reset counter
       // If letter is the same and counter is 2, replace it with underscore and reset counter
-      setOutput(output.substring(0, output.length - 1) + "_");
+      setOutput(output.substring(0, output.length - 2) + "_");
 
       setClickedLetters([]); // Reset last clicked letter
     }
