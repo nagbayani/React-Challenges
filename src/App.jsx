@@ -13,7 +13,8 @@ const style = {
     cursor: "pointer",
   },
 };
-function Tile({ letter, updateOutput, clickedLetters }) {
+
+function Tile({ letter, updateOutput }) {
   const handleClick = () => {
     updateOutput(letter);
   };
@@ -25,11 +26,11 @@ function Tile({ letter, updateOutput, clickedLetters }) {
   );
 }
 
-export function App() {
+export default function App() {
   const [output, setOutput] = useState("");
   const [clickedLetters, setClickedLetters] = useState([]);
   const [counter, setCounter] = useState(0); // Manage the counter state
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); // Create array element for each letter in alphabet
 
   const handleTileClick = (letter) => {
     const lastClickedLetter = clickedLetters[clickedLetters.length - 1];
@@ -38,16 +39,19 @@ export function App() {
       // If letter is different, add it to output and reset counter
       setClickedLetters([...clickedLetters, letter]);
       setOutput(output + letter);
-      setCounter(0); // Reset counter
+      setCounter(1); // Reset counter
     } else if (lastClickedLetter === letter && counter < 2) {
       // If letter is the same but counter is less than 2, add it to output and increment counter
       setClickedLetters([...clickedLetters, letter]);
-      setOutput(output + letter);
+      let newOutput = output.substring(0, output.length - 1);
+      setOutput(newOutput + letter);
       setCounter(counter + 1); // Increment counter
     } else if (lastClickedLetter === letter && counter === 2) {
-      // If letter is the same and counter is 2, replace it with underscore and reset counter
-      setOutput(output.substring(0, output.length - 3) + "_");
       setCounter(0); // Reset counter
+      // If letter is the same and counter is 2, replace it with underscore and reset counter
+      setOutput(output.substring(0, output.length - 1) + "_");
+
+      setClickedLetters([]); // Reset last clicked letter
     }
   };
 
