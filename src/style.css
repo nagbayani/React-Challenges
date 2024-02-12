@@ -13,3 +13,7 @@ body {
 .App {
   color: #72a24d;
 }
+
+.submission-form {
+  flex-direction: column;
+}
